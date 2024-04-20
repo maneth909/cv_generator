@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+{% load custom_filters %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Montserrat, sans-serif;
+        background-color: #232b2b;
+      }
+
+      .highlight {
+        background-color: #ffffff00;
+      }
+
+      .container {
+        background-color: #fff;
+        max-width: 800px;
+        margin: 30px auto;
+        height: 100%;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 40px;
+        padding-top: 10px;
+      }
+
+      .header {
+        text-align: center;
+        background-color: #ffffff00;
+      }
+
+      .header h1 {
+        margin-bottom: 5px;
+        margin-top: -25px;
+        background-color: #ffffff00;
+      }
+
+      .header h3 {
+        /* text-transform: uppercase; */
+        font-size: 15px;
+        font-weight: 500;
+        background-color: #ffffff00;
+        margin-left: 10px;
+        width: 690px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+
+      .main {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: #ffffff00;
+      }
+
+      .left {
+        flex: 1;
+        padding: 20px;
+        background-color: #ffffff00;
+      }
+
+      .left p {
+        line-height: 1;
+        background-color: #ffffff00;
+      }
+
+      .left ul li {
+        line-height: 1;
+        background-color: #ffffff00;
+      }
+
+      h2 {
+        padding: 1px;
+        color: #FFF;
+        font-size: 18px;
+        border-radius: 0 5px 5px 0;
+        background-color: #ffffff00;
+      }
+
+      .right {
+        flex: 1.2;
+        padding: 20px;
+        background-color: #ffffff00;
+      }
+
+      .right p {
+        line-height: 1;
+        background-color: #ffffff00;
+      }
+
+      .right h3 {
+        margin-bottom: 5px;
+        background-color: #ffffff00;
+      }
+
+      .right ul li {
+        line-height: 1;
+        background-color: #ffffff00;
+      }
+
+      .btn1 {
+        margin-left: 45%;
+        margin-bottom: 50px;
+        padding: 15px 15px;
+        font-size: 15px;
+        font-weight: bold;
+        background-color: rgb(106, 233, 106);
+        border-radius: 10px;
+      }
+
+      .about-container {
+        word-wrap: break-word; /* Allow long words to wrap */
+    }
+
+    .rounded-container {/* Border style */
+        border-radius: 5px; /* Rounded corners */
+        padding: 5px; /* Padding to give space around the content */
+        width: fit-content; 
+        height: fit-content;
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+
+    .colon {
+        display: inline-block;
+        width: 50px; /* Adjust the width as needed */
+        text-align: left;
+        margin-right: 10px; 
+        background-color: #ffffff00;
+        margin-bottom: 4px;
+    }
+
+    .colon2 {
+      margin-right: 10px;
+      background-color: #ffffff00;
+    }
+
+    .spaceline{
+      margin-bottom: 10px;
+      background-color: #ffffff00;
+    }
+
+    .data {
+        display: inline-block;
+        background-color: #ffffff00;
+    }
+
+
+
+    .skill{
+      margin-left: 25px;
+      background-color: #ffffff00;
+      margin-bottom: 4px;
+    }
+
+    .work-container {
+        display: flex;
+        justify-content: space-between; 
+        align-items: center;
+        margin-bottom: 4px;
+        background-color: #ffffff00;
+    }
+
+</style>
+
+    </style>
+  </head>
+
+  <body>
+    <h1
+      style="text-align: center; color: #fff; font-size: 40px; margin-top: 60px"
+    >
+      Your CV is done!
+    </h1>
+    <div id="mn" class="container">
+      <div class="header">
+        <br /><br />
+        <h1>{{name}}</h1>
+        <h3>{{about}}</h3>
+      </div>
+      <div class="main">
+        <div class="left">
+          <div class="rounded-container">
+            <h2>Personal Information</h2>
+        </div>
+          <p><strong class="colon">Name</strong><span class="colon2">:</span><span class="data">{{name}}</span></p>
+          <p><strong class="colon">Age</strong><span class="colon2">:</span><span class="data">{{age}}</span></p>
+          <p><strong class="colon">Email</strong><span class="colon2">:</span><span class="data">{{email}}</span></p>
+          <p><strong class="colon">Phone</strong><span class="colon2">:</span><span class="data">{{phone}}</span></p>
+        
+        <div class="rounded-container">
+          <h2>Education</h2>
+        </div>
+          {% for entry in education_data %}
+
+          <p><strong class="colon">Degree</strong><span class="colon2">:</span><span class="data">{{entry.degree}}</span></p>
+          <p><strong class="colon">College</strong><span class="colon2">:</span><span class="data">{{entry.college}}</span></p>
+          <p class="spaceline"><strong class="colon">Year</strong><span class="colon2">:</span><span class="data">{{entry.year}}</span></p>
+
+          {% endfor %}
+
+          <ul class="highlight">
+            <div class="rounded-container">
+              <h2>Skills</h2>
+            </div>
+            <ul class="highlight">
+              {% for key, value in skill_data.items %}
+                  {% if key|starts_with:'skill' and key != 'skill' %}
+                      <li class="skill">{{ value }}</li>
+                  {% endif %}
+              {% endfor %}
+            </ul>
+        </ul>
+
+          <div class="rounded-container">
+            <h2>Achievements</h2>
+            </div>
+              <ul class="highlight">
+                <ul class="highlight">
+                  {% for key, value in achievement_data.items %}
+                      {% if key|slice:":3" == 'ach' and key != 'ach' %}
+                          <li class="skill">{{ value }}</li>
+                      {% endif %}
+                  {% endfor %}
+    
+              </ul>
+
+        </div>
+        <div class="right">
+
+          <div class="rounded-container">
+          <h2>Work Experience</h2>
+          </div>
+          {% for work in work_data %}
+            <div class="work-container">
+              <p><strong style="background-color: #ffffff00; font-size: 18px;">{{ work.worktitle }}</strong> </p>
+              <p>{{ work.workduration }}</p>
+            </div>
+            <p style="margin-bottom: 15px; background-color: #ffffff00;"><span style="font-style: italic; background-color: #ffffff00; text-decoration: underline;">Responsibilities:</span> {{ work.workdes }}</p>
+          {% endfor %}
+
+          <div class="rounded-container">
+        <h2>Extra-ciricular Activities</h2>
+        </div>
+        {% for project in project_data %}
+
+          <div class="work-container">
+            <p><strong style="background-color: #ffffff00; font-size: 18px;">{{ project.title }}</strong> </p>
+            <p>{{ project.duration }}</p>
+          </div>
+          <p style="margin-bottom: 15px; background-color: #ffffff00;"><span style="font-style: italic; background-color: #ffffff00; text-decoration: underline;">Responsibilities:</span> {{ project.des }}</p>
+        {% endfor %}
+
+        <div class="rounded-container">
+          <h2>Languages</h2>
+          </div>
+          <ul class="highlight">
+            {% for key, value in language_data.items %}
+                {% if key|slice:":4" == 'lang' and key != 'lang' %}
+                    <li class="skill">{{ value }}</li>
+                {% endif %}
+            {% endfor %}
+          </ul>
+
+        </div>
+      </div>
+    </div>
+    <button onclick="generatePDF('mn')" type="button" class="btn1">
+      Download PDF
+    </button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script>
+      function generatePDF(containerId) {
+        const container = document.getElementById(containerId);
+
+        // Download as PDF
+        const pdfOptions = {
+          margin: 1,
+          filename: "resume.pdf",
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        };
+
+        html2pdf().from(container).set(pdfOptions).save();
+      }
+    </script>
+  </body>
+</html>

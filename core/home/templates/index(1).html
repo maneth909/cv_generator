@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #232b2b;
+      }
+
+      .form-container {
+        width: 60%;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background: #fff;
+        border-radius: 5px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+        margin-right: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: bold;
+      }
+
+      .form-group input[type="text"],
+      .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .form-group textarea {
+        height: 100px;
+      }
+
+      /* Apply styles to the skills input elements */
+      .om {
+        width: 100%;
+        padding: 10px 20px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .ed {
+        width: 100%;
+        padding: 10px 20px;
+        display: flex;
+        gap: 4%;
+      }
+
+      .com {
+        width: 80%;
+        padding: 5px 20px;
+        display: flex;
+        gap: 7%;
+      }
+
+      .op {
+        margin: 10px;
+      }
+
+      .btn1 {
+        margin-left: 43%;
+        padding: 15px 15px;
+        font-size: 15px;
+        font-weight: bold;
+        background-color: rgb(35, 144, 208);
+        border-radius: 10px;
+      }
+
+      /* You can add more styles as needed */
+
+      /* Adjust the styles for name and age form groups */
+      .form-group.two {
+        display: flex;
+        align-items: center;
+      }
+
+      .form-group.two label {
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+
+      .form-group.two input[type="text"] {
+        width: 100%; /* Adjust width as needed */
+      }
+      #educationContainer .form-group {
+        margin-bottom: 5px;
+        margin-right: 35px;
+      }
+
+      #projectContainer .form-group {
+        margin-bottom: 5px;
+        margin-right: 35px;
+      }
+
+      #workContainer .form-group {
+        margin-bottom: 5px;
+        margin-right: 35px;
+      }
+
+      .input-container {
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      hr {
+        width: 100%;
+        height: 1px;
+        background-color: #232b2b;
+        border: none;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center; color: #fff; font-size: 40px">
+      CV Generator
+    </h1>
+
+    <form action="{% url 'resume' %}" method="post">
+      {% csrf_token %}
+
+      <!-- ===================PERSONAL INFORMATION====================== -->
+
+      <div class="form-container">
+        <h2>Personal Information</h2>
+        <div class="form-group two">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" />
+          <label for="age">Age:</label>
+          <input type="text" id="age" name="age" />
+        </div>
+        <div class="form-group two">
+          <label for="name">About:</label>
+          <input type="text" id="name" name="about" />
+        </div>
+        <div class="form-group two">
+          <label for="email">Email:</label>
+          <input type="text" id="email" name="email" />
+          <label for="phone">Phone:</label>
+          <input type="text" id="phone" name="phone" />
+        </div>
+        <!-- <div class="form-group two">
+          <label for="skills">Skills:</label>
+          <div>
+            <input type="text" id="skills" name="skill1" />
+          </div>
+        </div> -->
+
+        <!-- =====================EDUCATION SECTION ================== -->
+        <hr>
+
+        <div class="form-group">
+          <h2>Education</h2>
+          <div id="educationContainer">
+            <!-- Initial Education Input Box -->
+            <div class="form-group two">
+              <div class="form-group">
+                <label for="degree1">Degree :</label>
+                <input type="text" id="degree1" name="degree1" />
+              </div>
+              <div class="form-group">
+                <label for="college1">College :</label>
+                <input type="text" id="college1" name="college1" />
+              </div>
+              <div class="form-group">
+                <label for="year1">Year :</label>
+                <input type="text" id="year1" name="year1" />
+              </div>
+            </div>
+          </div>
+        
+          <!-- Button to add more education input boxes -->
+          <button type="button" id="addEducation" style="margin-top: 5px">
+            Add Another Education
+          </button>
+        </div>
+        
+        <script>
+          var educationCounter = 2; // Counter for education input boxes
+        
+          document.getElementById("addEducation").addEventListener("click", function () {
+            var educationContainer = document.getElementById("educationContainer");
+            var newEducationBox = document.createElement("div");
+            newEducationBox.classList.add("form-group", "two");
+        
+            newEducationBox.innerHTML = `
+              <div class="form-group">
+                <label for="degree${educationCounter}">Degree :</label>
+                <input type="text" id="degree${educationCounter}" name="degree${educationCounter}" />
+              </div>
+              <div class="form-group">
+                <label for="college${educationCounter}">College :</label>
+                <input type="text" id="college${educationCounter}" name="college${educationCounter}" />
+              </div>
+              <div class="form-group">
+                <label for="year${educationCounter}">Year :</label>
+                <input type="text" id="year${educationCounter}" name="year${educationCounter}" />
+              </div>
+            `;
+            
+            educationContainer.appendChild(newEducationBox);
+            educationCounter++; 
+          });
+        </script>
+        
+
+        <hr>
+        <!-- ================LANGUAGAES======================= -->
+        <div class="form-group">
+          <h2>Language</h2>
+          <div id="languageContainer">
+            <div class="input-container">
+              <input
+                type="text"
+                id="lang1"
+                name="lang1"
+                style="width: 100px"
+              />
+            </div>
+            <div class="button-container">
+              <button type="button" id="addLanguage" style="margin-top: 15px">
+                Add Another Language
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <script>
+          var languageCounter = 2
+        
+          document.getElementById("addLanguage").addEventListener("click", function () {
+            var languageContainer = document.getElementById("languageContainer");
+            var newLanguageInput = document.createElement("div");
+            newLanguageInput.classList.add("input-container");
+            newLanguageInput.style.display = "inline-block"; 
+            
+            languageCounter++;
+            newLanguageInput.innerHTML = `
+              <input type="text" id="lang${languageCounter}" name="lang${languageCounter}" style="width: 100px" />
+            `;
+            
+            languageContainer.insertBefore(
+              newLanguageInput,
+              document.getElementById("addLanguage").parentNode
+            );
+          });
+        </script>
+        
+        
+        <!-- =====================work=================== -->
+        <hr>
+        <div class="form-group">
+          <h2>Work Experience</h2>
+            <div id="workContainer">
+              <div class="form-group two">
+                <div class="form-group">
+                  <label for="worktitle1">Title :</label>
+                  <input type="text" id="worktitle1" name="worktitle1" />
+                </div>
+                <div class="form-group">
+                  <label for="workduration1">Duration :</label>
+                  <input type="text" id="workduration1" name="workduration1" />
+                </div>
+                <div class="form-group">
+                  <label for="workdes1">Description :</label>
+                  <input type="text" id="workdes1" name="workdes1" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Button to add more work input boxes -->
+            <button type="button" id="addWork" style="margin-top: 5px">
+              Add Another Activity
+            </button>
+            </div>
+
+            <script>
+              var workCounter = 1;
+          
+              document.getElementById("addWork").addEventListener("click", function () {
+                  var workContainer = document.getElementById("workContainer");
+                  var newWorkBox = document.createElement("div");
+                  newWorkBox.classList.add("form-group", "two");
+          
+                  workCounter++;
+                  newWorkBox.innerHTML = `
+                      <div class="form-group">
+                          <label for="worktitle${workCounter}">Title :</label>
+                          <input type="text" id="worktitle${workCounter}" name="worktitle${workCounter}" />
+                      </div>
+                      <div class="form-group">
+                          <label for="workduration${workCounter}">Duration :</label>
+                          <input type="text" id="workduration${workCounter}" name="workduration${workCounter}" />
+                      </div>
+                      <div class="form-group">
+                          <label for="workdes${workCounter}">Description :</label>
+                          <input type="text" id="workdes${workCounter}" name="workdes${workCounter}" />
+                      </div>
+                  `;
+          
+                  // Only append the new input box if the counter is greater than 1
+                  if (workCounter > 1) {
+                      workContainer.appendChild(newWorkBox);
+                          }
+                      });
+                  </script>
+
+        
+      
+        <!-- =====================PROJECT SECTION=================== -->
+        <hr>
+        <div class="form-group">
+          <h2>Extra-ciricular Activities</h2>
+          <div id="projectContainer">
+            <!-- Initial Extra-ciricular Activities Input Box -->
+            <div class="form-group two">
+              <div class="form-group">
+                <label for="title1">Title :</label>
+                <input type="text" id="title1" name="title1" />
+              </div>
+              <div class="form-group">
+                <label for="duration1">Duration :</label>
+                <input type="text" id="duration1" name="duration1" />
+              </div>
+              <div class="form-group">
+                <label for="des1">Description :</label>
+                <input type="text" id="des1" name="des1" />
+              </div>
+            </div>
+          </div>
+        
+          <!-- Button to add more education input boxes -->
+          <button type="button" id="addProject" style="margin-top: 5px">
+            Add Another Activity
+          </button>
+        </div>
+        
+        <script>
+          var projectCounter = 1; 
+        
+          document.getElementById("addProject").addEventListener("click", function () {
+            var projectContainer = document.getElementById("projectContainer");
+            var newProjectBox = document.createElement("div");
+            newProjectBox.classList.add("form-group", "two");
+        
+            projectCounter++;
+            newProjectBox.innerHTML = `
+              <div class="form-group">
+                <label for="title${projectCounter}">Title :</label>
+                <input type="text" id="title${projectCounter}" name="title${projectCounter}" />
+              </div>
+              <div class="form-group">
+                <label for="duration${projectCounter}">Duration :</label>
+                <input type="text" id="duration${projectCounter}" name="duration${projectCounter}" />
+              </div>
+              <div class="form-group">
+                <label for="des${projectCounter}">Description :</label>
+                <input type="text" id="des${projectCounter}" name="des${projectCounter}" />
+              </div>
+            `;
+        
+            projectContainer.appendChild(newProjectBox);
+          });
+        </script>
+        
+        <hr>
+        <!-- ================Skill======================= -->
+        <div class="form-group">
+          <h2>Skills</h2>
+          <div id="skillContainer">
+            <div class="input-container">
+              <input type="text" id="skill1" name="skill1" style="width: 100px; margin-bottom: 15px" />
+            </div>
+            <div class="button-container">
+              <button type="button" id="addSkill" style="margin-top: 15px">
+                Add Another Skill
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <script>
+          var skillCounter = 2; 
+        
+          document.getElementById("addSkill").addEventListener("click", function () {
+            var skillContainer = document.getElementById("skillContainer");
+            var newSkillInput = document.createElement("div");
+            newSkillInput.classList.add("input-container");
+            newSkillInput.style.display = "inline-block"; 
+            
+            skillCounter++;
+            newSkillInput.innerHTML = `
+              <input type="text" id="skill${skillCounter}" name="skill${skillCounter}" style="width: 100px; margin-bottom: 15px" />
+            `;
+            skillContainer.insertBefore(
+              newSkillInput,
+              document.getElementById("addSkill").parentNode
+            );
+          });
+        </script>
+        
+
+        <!-- ==========================ACHIEVEMENT================= -->
+        <hr>
+        <div class="form-group">
+          <h2>Achievements</h2>
+        </div>
+        <div id="achievementContainer">
+          <div class="form-group">
+            <input type="text" id="ach1" name="ach1" />
+          </div>
+        </div>
+        <button type="button" id="addAchievement">Add Another Achievement</button>
+        
+        <script>
+          var achievementCounter = 2; 
+        
+          document.getElementById("addAchievement").addEventListener("click", function () {
+            var achievementContainer = document.getElementById("achievementContainer");
+            var newAchievementInput = document.createElement("div");
+            newAchievementInput.classList.add("form-group");
+        
+            achievementCounter++;
+            newAchievementInput.innerHTML = `
+              <input type="text" id="ach${achievementCounter}" name="ach${achievementCounter}" />
+            `;
+            achievementContainer.appendChild(newAchievementInput);
+          });
+        </script>
+    </form>
+
+    <br/>
+    <button type="submit" class="btn1" style="margin-top: 50px;">Submit</button>
+
+  </body>
+</html>
