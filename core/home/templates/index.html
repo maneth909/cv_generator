@@ -378,7 +378,7 @@
           <h2>Skills</h2>
           <div id="skillContainer">
             <div class="input-container">
-              <input type="text" id="skill1" name="skill1" style="width: 100px" />
+              <input type="text" id="skill1" name="skill1" style="width: 100px; margin-bottom: 15px" />
             </div>
             <div class="button-container">
               <button type="button" id="addSkill" style="margin-top: 15px">
@@ -399,7 +399,7 @@
             
             skillCounter++;
             newSkillInput.innerHTML = `
-              <input type="text" id="skill${skillCounter}" name="skill${skillCounter}" style="width: 100px" />
+              <input type="text" id="skill${skillCounter}" name="skill${skillCounter}" style="width: 100px; margin-bottom: 15px" />
             `;
             skillContainer.insertBefore(
               newSkillInput,
